@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap 
+		{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin:0;
+			font-family:"微软雅黑";
+		}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8RxVk0C4tzb39iY83YGzWbkUXPmoyNjj"></script>
+	
+	<title>百度地图测试</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+	<script type="text/javascript">// 百度地图API功能
+		var map = new BMap.Map("allmap");    // 创建Map实例
+		map.centerAndZoom("温州", 8);  // 初始化地图,设置中心点坐标和地图级别
+		map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+		map.setCurrentCity("温州");          // 设置地图显示的城市 此项是必须设置的
+		map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+		
+		var color = new Array("#000088", "#008000", "#00ff00", "#330000", "#880000", "#ff0000", "#ff3300", "#ff0055", "#440069", "#229475", "#453683");
+		var txt = '{ "county" : [' +
+		'{ "firstName":"龙湾区"},' +
+		'{ "firstName":"平阳县"},' +
+		'{ "firstName":"洞头县"},' +
+		'{ "firstName":"苍南县"},' +
+		'{ "firstName":"永嘉县"},' +
+		'{ "firstName":"文成县"},' +
+		'{ "firstName":"瓯海区"},' +
+		'{ "firstName":"乐清市"},' +
+		'{ "firstName":"泰顺县"},' +
+		'{ "firstName":"瑞安市"},' +
+		'{ "firstName":"鹿城区"} ]}';
+		
+		var obj = eval("(" + txt + ")");
+		
+		var plyArray = new Array();
+		
+		var intCallBack = 0;
+		function drawBondary(rs)
+		{       //获取行政区域
+			var count = rs.boundaries.length; //行政区域的点有多少个
+			if (count === 0) {
+				alert('未能获取当前输入行政区域');
+				return ;
+			}
+         	var pointArray = [];
+			for (var i = 0; i < count; i++) {
+				var ply = new BMap.Polygon(rs.boundaries, {strokeWeight: 2}); //建立多边形覆盖物
+				
+				intCallBack++;
+				ply.setFillColor(color[j]);
+				pointArray = pointArray.concat(ply.getPath());
+			} 
+			map.addOverlay(ply);  //添加覆盖物
+				
+			//alert(plyArray.length);
+			if(intCallBack != obj.county.length)
+				return;
+			
+			
+			alert(intCallBack);
+			
+			//	plyArray[0].setFillColor(color[0]);
+			//	alert(intCallBack);
+			//	map.addOverlay(plyArray[0]);
+			
+		}
+	
+		var j;
+		for(j = 0; j < obj.county.length; j++)
+		{
+			var bdary = new BMap.Boundary();
+			bdary.get(obj.county[j].firstName, drawBondary);   
+		}
+		
+	/*	for(j = 0; j < plyArray.length; j++)
+		{
+			plyArrayp[i].setFillColor(color[j]);
+			map.addOverlay(plyArray[i]);
+			
+		}*/
+	//	for(j = 0; j < )
+		
+		//alert(plyArray[0]);
+//		for(j = 0; j< plyArray.length; j++)
+//		{
+//			plyArray[j].setFillColor(color[j]);
+//		}
+	
+	</script>
+</html>

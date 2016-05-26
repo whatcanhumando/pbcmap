@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="easyui.css">
+<link rel="stylesheet" type="text/css" href="icon.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.easyui.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8RxVk0C4tzb39iY83YGzWbkUXPmoyNjj"></script>
+<script type="text/javascript" src="pbcmap.js"></script>
+<style type="text/css">
+body, html, #allmap {
+	height: 100%;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+
+#infodown div{
+	background-image: url(chart.png);
+	margin: 2px;
+	height: 6%;
+	background-position: 100px;
+	background-repeat:no-repeat; 
+	width:99%;
+}
+</style>
+<title>金融网点</title>
+</head>
+<body>
+	<div class="easyui-layout" style="width: 100%; height: 100%">
+		<div data-options="region:'east',split:true" title="信息" data-options="fit:true" style="width: 30%" id="info">
+			<div class="easyui-layout" style="width: 100%; height: 100%">
+				<div data-options="region:'north'"  data-options="fit:true" id="infoup" style="height:40%">
+					<input type="button" id="lastStep" onclick="clickLastStep()" value="返回上一步" disabled="disabled" />
+				</div>
+				<div data-options="region:'south',split:true"  title="图表" id="infodown" style="height:60%">
+				</div>
+				<div data-options="region:'center'"></div>
+			</div>
+		</div>
+		<div data-options="region:'center'" id="allmap"></div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
